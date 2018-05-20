@@ -3,11 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Alphabet Soup</title>
+    <style media="screen">
+      .speak-and-spell {
+        /* background-color: black; */
+      }
+      .text-output {
+        color: green;
+        font-size:40px;
+      }
+    </style>
   </head>
-  <body>
-    <input type="text" name="type-here" placeholder="Start typing!" />
+  <body class="speak-and-spell">
+    <div class="text-output" name="output"></div>
     <a name="speak-input">Speak!</a>
     <a name="clear-input">Clear</a>
+
+    <br />
+    <br />
+
+    <a name="change-language" data-lang='en'>English</a>
+    <a name="change-language" data-lang='fr'>French</a>
 
     <script src="./index.js"></script>
   </body>
