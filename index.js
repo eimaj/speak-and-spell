@@ -6,6 +6,41 @@ const speak = function (text) {
   return window.speechSynthesis.speak(synth);
 };
 
+const languages = [
+  'en',
+  'fr',
+];
+
+const letters = [
+  'KeyA',
+  'KeyB',
+  'KeyC',
+  'KeyD',
+  'KeyE',
+  'KeyF',
+  'KeyG',
+  'KeyH',
+  'KeyI',
+  'KeyJ',
+  'KeyK',
+  'KeyL',
+  'KeyM',
+  'KeyN',
+  'KeyO',
+  'KeyP',
+  'KeyQ',
+  'KeyR',
+  'KeyS',
+  'KeyT',
+  'KeyU',
+  'KeyV',
+  'KeyW',
+  'KeyX',
+  'KeyY',
+  'KeyZ',
+  'Space',
+];
+
 const state = {
   input: null,
   output: null,
@@ -34,13 +69,33 @@ const renderOutput = function (text) {
   return state.output.innerText;
 };
 
+const speakInput = function () {
+  setProperty('text', state.text);
+  return speak(state.text);
+};
+
 const actions = {
   speakLetter(e) {
-    console.log(e);
     // catch enter keyCode == 13
     // catch esc keyCode == 27
     // catch tab keyCode == 9: block event
     // catch backspace keyCode == 8: block event
+
+    if (e.code === 'Backspace') {
+      const text = state.text;
+      return setText(text.substring(0, text.length - 1));
+    };
+
+    if (e.code === 'Enter') {
+      return speakInput();
+    };
+
+    // if (e.code === 'Tab') {
+    //   const newLang = state.lang === 'en' ? 'fr' : 'en';
+    //   return setProperty('lang', newLang);
+    // };
+
+    if (letters.indexOf(e.code) === -1) { return false; };
 
     setText(state.text + e.key);
     return speak(state.text[state.text.length - 1]);
@@ -49,11 +104,6 @@ const actions = {
   changeLanguage(e) {
     const newLang = e.target.dataset['lang']
     return setProperty('lang', newLang);
-  },
-
-  speakInput() {
-    setProperty('text', state.text);
-    return speak(state.text);
   },
 
   clearText() {
@@ -74,7 +124,7 @@ const app = {
   },
 
   bindSubmitButton() {
-    return state.submit.addEventListener('click', actions.speakInput);
+    return state.submit.addEventListener('click', speakInput);
   },
 
   bindClearButton() {
