@@ -5,24 +5,79 @@
     <title>Alphabet Soup</title>
     <style media="screen">
       .speak-and-spell {
-        /* background-color: black; */
+        background-color: black;
+        font-family: monospace;
+        line-height: 1.5em;
       }
+
       .text-output {
         color: green;
         font-size:40px;
       }
+
+      .languages {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        color: white;
+      }
+
+      .languages__toggle {
+        cursor: pointer;
+        color: grey;
+      }
+
+      .languages__toggle--is-active {
+        color: white;
+      }
+
+      .actions {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        text-align: right;
+        color: white;
+      }
+
+      .actions__speak {
+        display: block;
+      }
+
+      .actions__clear {
+        display: block;
+      }
     </style>
   </head>
+
   <body class="speak-and-spell">
     <div class="text-output" name="output"></div>
-    <a name="speak-input">Speak!</a>
-    <a name="clear-input">Clear</a>
 
-    <br />
-    <br />
+    <div class="actions">
+      <a class="actions__speak" name="speak-input">
+        Speak! (Enter)
+      </a>
+      <a class="actions__clear" name="clear-input">
+        Clear (Del)
+      </a>
+    </div>
 
-    <a name="change-language" data-lang='en'>English</a>
-    <a name="change-language" data-lang='fr'>French</a>
+    <div class="languages">
+      <a
+        class="languages__toggle"
+        name="change-language"
+        data-lang='en'
+      >
+        English
+      </a>
+      /
+      <a
+        class="languages__toggle languages__toggle--is-active"
+        name="change-language"
+        data-lang='fr'
+      >
+        French
+      </a>
+    </div>
 
     <script src="./index.js"></script>
   </body>
