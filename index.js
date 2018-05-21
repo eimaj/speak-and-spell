@@ -76,6 +76,7 @@ const speakInput = function () {
 
 const actions = {
   speakLetter(e) {
+    console.log('e.code', e.code);
     // catch enter keyCode == 13
     // catch esc keyCode == 27
     // catch tab keyCode == 9: block event
@@ -84,6 +85,10 @@ const actions = {
     if (e.code === 'Backspace') {
       const text = state.text;
       return setText(text.substring(0, text.length - 1));
+    };
+
+    if (e.code === 'Delete') {
+      return setText('');
     };
 
     if (e.code === 'Enter') {
