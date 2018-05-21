@@ -1,11 +1,3 @@
-const speak = function (text) {
-  const synth = new SpeechSynthesisUtterance(text);
-  synth.lang = state.lang;
-  synth.rate = state.rate;
-
-  return window.speechSynthesis.speak(synth);
-};
-
 const languages = [
   'en',
   'fr',
@@ -52,6 +44,15 @@ const state = {
 
   lang: 'fr',
   rate: '1',
+  synth: null,
+};
+
+const speak = function (text) {
+  state.synth.lang = state.lang;
+  state.synth.rate = state.rate;
+  state.synth.text = text;
+
+  return window.speechSynthesis.speak(state.synth);
 };
 
 const setProperty = function (key, value) {
@@ -155,6 +156,11 @@ const app = {
     return this.bindClearButton();
   },
 
+  initSynth() {
+    const synth = new SpeechSynthesisUtterance('');
+    return setProperty('synth', synth);
+  },
+
   initLanguages() {
     const nodeList = document.querySelectorAll('a[name="change-language"]');
     const languageButtons = Array.from(nodeList);
@@ -169,6 +175,7 @@ const app = {
     this.initSubmit();
     this.initClear();
     this.initLanguages();
+    this.initSynth();
 
     return this;
   },
