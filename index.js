@@ -45,6 +45,7 @@ const state = {
   lang: 'fr',
   rate: '1',
   synth: null,
+  utterance: null,
 };
 
 const speak = function (text) {
@@ -157,7 +158,10 @@ const app = {
   },
 
   initSynth() {
-    const synth = new SpeechSynthesisUtterance('');
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance('');
+
+    setProperty('utterance', utterance);
     return setProperty('synth', synth);
   },
 
