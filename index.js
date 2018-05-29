@@ -44,27 +44,23 @@ const letters = [
 ];
 
 const state = {
+  // DOM elements:
   input: null,
   output: null,
   clear: null,
   submit: null,
   languages: [],
 
+  // User generated text:
   text: '',
 
+  // Config for speechSynthesis:
   lang: 'fr',
   rate: '1',
+
+  // speechSynthesis instances:
   synth: null,
   utterance: null,
-};
-
-const speak = function (text) {
-  state.utterance.lang = state.lang;
-  state.utterance.rate = state.rate;
-  state.utterance.text = text;
-
-  state.synth.cancel();
-  return state.synth.speak(state.utterance);
 };
 
 const setProperty = function (key, value) {
@@ -72,22 +68,29 @@ const setProperty = function (key, value) {
   return state[key];
 };
 
-const setText = function (text) {
+const renderText = function (text) {
+  // Set to state:
   setProperty('text', text);
-  return renderOutput(state.text);
-};
 
-const renderOutput = function (text) {
+  // Send to DOM:
   state.output.innerText = text;
   return state.output.innerText;
 };
 
-const speakInput = function () {
-  setProperty('text', state.text);
-  return speak(state.text);
+const speak = function (text) {
+  // Config:
+  state.utterance.lang = state.lang;
+  state.utterance.rate = state.rate;
+  state.utterance.text = text;
+
+  // Stop current speech:
+  state.synth.cancel();
+
+  // Speak:
+  return state.synth.speak(state.utterance);
 };
 
-const toggleLangageButtons = function (newLang) {
+const toggleLangButtons = function (newLang) {
   const activeLang = state.languages.filter(language => language.dataset['lang'] === newLang);
 
   state.languages.map((lang) => lang.className = 'languages__toggle');
@@ -99,11 +102,11 @@ const toggleLangageButtons = function (newLang) {
 const keypress = {
   backspace() {
     const text = state.text;
-    return setText(text.substring(0, text.length - 1));
+    return renderText(text.substring(0, text.length - 1));
   },
 
   enter() {
-    return speakInput();
+    return actions.speakText();
   },
 
   escape() {
@@ -111,7 +114,7 @@ const keypress = {
   },
 
   letter(key) {
-    setText(state.text + key);
+    renderText(state.text + key);
     return speak(state.text[state.text.length - 1]);
   },
 };
@@ -129,12 +132,17 @@ const actions = {
   changeLanguage(e) {
     const newLang = e.target.dataset['lang'];
 
-    toggleLangageButtons(newLang);
+    toggleLangButtons(newLang);
     return setProperty('lang', newLang);
   },
 
+  speakText() {
+    setProperty('text', state.text);
+    return speak(state.text);
+  },
+
   clearText() {
-    return setText('');
+    return renderText('');
   },
 };
 
@@ -151,7 +159,7 @@ const bind = {
   },
 
   submitButton() {
-    return state.submit.addEventListener('click', speakInput);
+    return state.submit.addEventListener('click', this.speakText);
   },
 
   clearButton() {
