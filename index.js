@@ -49,11 +49,12 @@ const state = {
 };
 
 const speak = function (text) {
-  state.synth.lang = state.lang;
-  state.synth.rate = state.rate;
-  state.synth.text = text;
+  state.utterance.lang = state.lang;
+  state.utterance.rate = state.rate;
+  state.utterance.text = text;
 
-  return window.speechSynthesis.speak(state.synth);
+  state.synth.cancel();
+  return state.synth.speak(state.utterance);
 };
 
 const setProperty = function (key, value) {
