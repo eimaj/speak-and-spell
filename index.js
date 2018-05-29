@@ -77,40 +77,49 @@ const speakInput = function () {
   return speak(state.text);
 };
 
+const toggleLangageButtons = function (newLang) {
+  const activeLang = state.languages.filter(language => language.dataset['lang'] === newLang);
+
+  state.languages.map((lang) => lang.className = 'languages__toggle');
+  activeLang[0].className = 'languages__toggle languages__toggle--is-active';
+
+  return activeLang[0];
+};
+
+const keypress = {
+  backspace() {
+    const text = state.text;
+    return setText(text.substring(0, text.length - 1));
+  },
+
+  enter() {
+    return speakInput();
+  },
+
+  escape() {
+    return actions.clearText();
+  },
+
+  letter(key) {
+    setText(state.text + key);
+    return speak(state.text[state.text.length - 1]);
+  },
+};
+
 const actions = {
-  speakLetter(e) {
-    console.log('e.code', e.code);
-    // catch enter keyCode == 13
-    // catch esc keyCode == 27
-    // catch tab keyCode == 9: block event
-    // catch backspace keyCode == 8: block event
-
-    if (e.code === 'Backspace') {
-      const text = state.text;
-      return setText(text.substring(0, text.length - 1));
-    };
-
-    if (e.code === 'Delete') {
-      return setText('');
-    };
-
-    if (e.code === 'Enter') {
-      return speakInput();
-    };
-
-    // if (e.code === 'Tab') {
-    //   const newLang = state.lang === 'en' ? 'fr' : 'en';
-    //   return setProperty('lang', newLang);
-    // };
-
+  handleKeyup(e) {
+    if (e.code === 'Backspace') { keypress.backspace(); };
+    if (e.code === 'Enter') { keypress.enter(); };
+    if (e.code === 'Escape') { keypress.escape(); };
     if (letters.indexOf(e.code) === -1) { return false; };
 
-    setText(state.text + e.key);
-    return speak(state.text[state.text.length - 1]);
+    return keypress.letter(e.key);
   },
 
   changeLanguage(e) {
-    const newLang = e.target.dataset['lang']
+    const newLang = e.target.dataset['lang'];
+
+    toggleLangageButtons(newLang);
     return setProperty('lang', newLang);
   },
 
@@ -119,29 +128,31 @@ const actions = {
   },
 };
 
-const app = {
-  bindInput() {
+const bind = {
+  input() {
     state.input.focus();
-    return state.input.addEventListener('keyup', actions.speakLetter);
+    return state.input.addEventListener('keyup', actions.handleKeyup);
   },
 
-  bindLanguageButtons() {
+  languageButtons() {
     return state.languages.map(function (language) {
       return language.addEventListener('click', actions.changeLanguage)
     });
   },
 
-  bindSubmitButton() {
+  submitButton() {
     return state.submit.addEventListener('click', speakInput);
   },
 
-  bindClearButton() {
+  clearButton() {
     return state.clear.addEventListener('click', actions.clearText);
   },
+};
 
+const app = {
   initInput() {
     setProperty('input', document.querySelector('body'));
-    return this.bindInput();
+    return bind.input();
   },
 
   initOutput() {
@@ -150,12 +161,12 @@ const app = {
 
   initSubmit() {
     setProperty('submit', document.querySelector('a[name="speak-input"]'));
-    return this.bindSubmitButton();
+    return bind.submitButton();
   },
 
   initClear() {
     setProperty('clear', document.querySelector('a[name="clear-input"]'));
-    return this.bindClearButton();
+    return bind.clearButton();
   },
 
   initSynth() {
@@ -171,7 +182,7 @@ const app = {
     const languageButtons = Array.from(nodeList);
 
     setProperty('languages', languageButtons);
-    return this.bindLanguageButtons();
+    return bind.languageButtons();
   },
 
   init() {
