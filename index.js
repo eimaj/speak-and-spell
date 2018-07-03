@@ -129,8 +129,9 @@ const actions = {
   },
 
   speakText() {
-    setProperty('text', state.text);
-    return speak(state.text);
+    const currentText = state.output.value;
+
+    return speak(currentText);
   },
 
   clearText() {
