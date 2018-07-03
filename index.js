@@ -170,12 +170,12 @@ const app = {
   },
 
   initSubmit() {
-    setProperty('submit', document.querySelector('a[name="speak-input"]'));
+    setProperty('submit', document.querySelector('[name="speak-input"]'));
     return bind.submitButton();
   },
 
   initClear() {
-    setProperty('clear', document.querySelector('a[name="clear-input"]'));
+    setProperty('clear', document.querySelector('[name="clear-input"]'));
     return bind.clearButton();
   },
 
@@ -186,7 +186,7 @@ const app = {
   },
 
   initLanguages() {
-    const nodeList = document.querySelectorAll('a[name="change-language"]');
+    const nodeList = document.querySelectorAll('[name="change-language"]');
     const languageButtons = Array.from(nodeList);
 
     setProperty('languages', languageButtons);
