@@ -51,9 +51,6 @@ const state = {
   submit: null,
   languages: [],
 
-  // User generated text:
-  text: '',
-
   // Config for speechSynthesis:
   lang: 'fr',
   rate: '1',
