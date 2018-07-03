@@ -164,7 +164,9 @@ const app = {
   },
 
   initOutput() {
-    return setProperty('output', document.querySelector('div[name="output"]'));
+    const output = document.querySelector('[name="textarea"]');
+
+    return setProperty('output', output);
   },
 
   initSubmit() {
