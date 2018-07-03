@@ -98,11 +98,6 @@ const toggleLangButtons = function (newLang) {
 };
 
 const keypress = {
-  backspace() {
-    const text = state.text;
-    return renderText(text.substring(0, text.length - 1));
-  },
-
   enter() {
     return actions.speakText();
   },
@@ -119,7 +114,6 @@ const keypress = {
 
 const actions = {
   handleKeyup(e) {
-    if (e.code === 'Backspace') { keypress.backspace(); };
     if (e.code === 'Enter') { keypress.enter(); };
     if (e.code === 'Escape') { keypress.escape(); };
     if (letters.indexOf(e.code) === -1) { return false; };
