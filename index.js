@@ -60,7 +60,6 @@ const state = {
 
   // speechSynthesis instances:
   synth: null,
-  utterance: null,
 };
 
 const setProperty = function (key, value) {
@@ -78,16 +77,18 @@ const renderText = function (text) {
 };
 
 const speak = function (text) {
+  const utterance = new SpeechSynthesisUtterance('');
+
   // Config:
-  state.utterance.lang = state.lang;
-  state.utterance.rate = state.rate;
-  state.utterance.text = text;
+  utterance.lang = state.lang;
+  utterance.rate = state.rate;
+  utterance.text = text;
 
   // Stop current speech:
   state.synth.cancel();
 
   // Speak:
-  return state.synth.speak(state.utterance);
+  return state.synth.speak(utterance);
 };
 
 const toggleLangButtons = function (newLang) {
@@ -189,9 +190,7 @@ const app = {
 
   initSynth() {
     const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance('');
 
-    setProperty('utterance', utterance);
     return setProperty('synth', synth);
   },
 
