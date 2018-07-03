@@ -113,12 +113,12 @@ const keypress = {
 };
 
 const actions = {
-  handleKeyup(e) {
+  handleKeyup(event) {
     if (e.code === 'Enter') { keypress.enter(); };
     if (e.code === 'Escape') { keypress.escape(); };
-    if (letters.indexOf(e.code) === -1) { return false; };
+    if (letters.indexOf(event.code) === -1) { return false; };
 
-    return keypress.letter(e.key);
+    return keypress.letter(event.key);
   },
 
   changeLanguage(e) {
