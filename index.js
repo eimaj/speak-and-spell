@@ -107,8 +107,8 @@ const keypress = {
   },
 
   letter(key) {
-    renderText(state.text + key);
-    return speak(state.text[state.text.length - 1]);
+    const currentText = state.output.value;
+    return speak(currentText[currentText.length - 1]);
   },
 };
 
