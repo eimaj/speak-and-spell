@@ -68,12 +68,9 @@ const setProperty = function (key, value) {
 };
 
 const renderText = function (text) {
-  // Set to state:
-  setProperty('text', text);
+  state.output.value = text;
 
-  // Send to DOM:
-  state.output.innerText = text;
-  return state.output.innerText;
+  return state.output.value;
 };
 
 const speak = function (text) {
