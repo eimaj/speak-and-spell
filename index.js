@@ -1,6 +1,6 @@
 const languages = [
-  'en',
-  'fr',
+  'en-US',
+  'fr-CA',
 ];
 
 const letters = [
@@ -52,7 +52,7 @@ const state = {
   languages: [],
 
   // Config for speechSynthesis:
-  lang: 'fr',
+  lang: 'fr-CA',
   rate: '1',
 
   // speechSynthesis instances:
