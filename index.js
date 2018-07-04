@@ -166,10 +166,6 @@ const app = {
   },
 
   init() {
-    this.initInput();
-    this.initOutput();
-    this.initSubmit();
-    this.initClear();
     this.initLanguages();
     this.initSynth();
 
