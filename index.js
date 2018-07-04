@@ -141,18 +141,12 @@ const bind = {
       return language.addEventListener('click', actions.changeLanguage)
     });
   },
-  clearButton() {
-    return state.clear.addEventListener('click', actions.clearText);
-  },
 };
 
 const app = {
   initTextArea() {
     const textarea = document.querySelector('[name="textarea"]');
 
-  initClear() {
-    setProperty('clear', document.querySelector('[name="clear-input"]'));
-    return bind.clearButton();
     setProperty('textarea', textarea);
     return bind.textarea();
   },
