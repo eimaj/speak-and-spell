@@ -102,6 +102,9 @@ const keypress = {
     return actions.clearText();
   },
 
+  letter() {
+    const currentText = state.textarea.value;
+
     return speak(currentText[currentText.length - 1]);
   },
 };
