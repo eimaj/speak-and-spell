@@ -102,22 +102,21 @@ const keypress = {
     return actions.clearText();
   },
 
-  letter(key) {
     return speak(currentText[currentText.length - 1]);
   },
 };
 
 const actions = {
   handleKeyup(event) {
-    if (e.code === 'Enter') { keypress.enter(); };
-    if (e.code === 'Escape') { keypress.escape(); };
+    if (event.code === 'Enter') { keypress.enter(); };
+    if (event.code === 'Escape') { keypress.escape(); };
     if (letters.indexOf(event.code) === -1) { return false; };
 
     return keypress.letter(event.key);
   },
 
-  changeLanguage(e) {
-    const newLang = e.target.dataset['lang'];
+  changeLanguage(event) {
+    const newLang = event.target.dataset['lang'];
 
     toggleLangButtons(newLang);
     return setProperty('lang', newLang);
