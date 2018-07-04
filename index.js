@@ -63,9 +63,9 @@ const setProperty = function (key, value) {
 };
 
 const renderText = function (text) {
-  state.output.value = text;
+  state.textarea.value = text;
 
-  return state.output.value;
+  return state.textarea.value;
 };
 
 const speak = function (text) {
@@ -102,7 +102,6 @@ const keypress = {
   },
 
   letter(key) {
-    const currentText = state.output.value;
     return speak(currentText[currentText.length - 1]);
   },
 };
@@ -124,7 +123,7 @@ const actions = {
   },
 
   speakText() {
-    const currentText = state.output.value;
+    const currentText = state.textarea.value;
 
     return speak(currentText);
   },
@@ -153,16 +152,20 @@ const bind = {
 };
 
 const app = {
+  initTextArea() {
   },
 
   initSubmit() {
     setProperty('submit', document.querySelector('[name="speak-input"]'));
     return bind.submitButton();
   },
+    const textarea = document.querySelector('[name="textarea"]');
 
   initClear() {
     setProperty('clear', document.querySelector('[name="clear-input"]'));
     return bind.clearButton();
+    setProperty('textarea', textarea);
+    return bind.textarea();
   },
 
   initSynth() {
