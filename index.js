@@ -166,6 +166,7 @@ const app = {
   },
 
   init() {
+    this.initTextArea();
     this.initLanguages();
     this.initSynth();
 
