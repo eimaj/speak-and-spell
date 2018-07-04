@@ -1,8 +1,19 @@
+
+/**
+ * An Array of default languages based on the browser API
+ *
+ * @return {String[]}
+ */
 const languages = [
   'en-US',
   'fr-CA',
 ];
 
+/**
+ * An Array of available key codes that can be rendered into the textarea.
+ *
+ * @return {String[]}
+ */
 const letters = [
   'KeyA',
   'KeyB',
@@ -43,6 +54,12 @@ const letters = [
   'Space',
 ];
 
+
+/**
+ * The initial state Object for this application.
+ *
+ * @return {Object}
+ */
 const state = {
   // DOM elements:
   textarea: null,
@@ -58,17 +75,36 @@ const state = {
   synth: null,
 };
 
+/**
+ * The method that sets a value in the state Object.
+ *
+ * @param  {String}                        key   The key whose value will be set
+ * @param  {Boolean|String|Array|Object}   value The value to set at key
+ * @return {Boolean|String|Array|Object}
+ */
 const setProperty = function (key, value) {
   state[key] = value;
   return state[key];
 };
 
+/**
+ * A method to set the value of the textarea.
+ *
+ * @param  {String} text The text to set as the textarea value
+ * @return {String}      The updated value of textarea
+ */
 const renderText = function (text) {
   state.textarea.value = text;
 
   return state.textarea.value;
 };
 
+/**
+ * Create a new utterance, triggers synth.cancel() and speak() the new utterance.
+ *
+ * @param  {String} text  The text to speak
+ * @return {Undefined}
+ */
 const speak = function (text) {
   const utterance = new SpeechSynthesisUtterance('');
 
@@ -84,6 +120,12 @@ const speak = function (text) {
   return state.synth.speak(utterance);
 };
 
+/**
+ * Updates the lang state and toggles the active class on the button.
+ *
+ * @param  {String} newLang   The lang that will be set
+ * @return {HTMLElement}      The active button
+ */
 const toggleLangButtons = function (newLang) {
   const activeLang = state.languageButtons.filter(language => language.dataset['lang'] === newLang);
 
@@ -93,15 +135,33 @@ const toggleLangButtons = function (newLang) {
   return activeLang[0];
 };
 
+/**
+ * The Object that contains keypress methods.
+ */
 const keypress = {
+  /**
+   * Triggers the speakText method when Enter is pressed.
+   *
+   * @return {Undefined}  The return from speak()
+   */
   enter() {
     return actions.speakText();
   },
 
+  /**
+   * Triggers the clearText() method.
+   *
+   * @return {String}  An empty String returned by renderText()
+   */
   escape() {
     return actions.clearText();
   },
 
+  /**
+   * Captures the last character from textarea an passes it to speak().
+   *
+   * @return {Undefined}  The return from speak()
+   */
   letter() {
     const currentText = state.textarea.value;
 
@@ -109,7 +169,16 @@ const keypress = {
   },
 };
 
+/**
+ * The Object that contains application actions.
+ */
 const actions = {
+  /**
+   * Recieves the keyup Event and figures out what to do with it.
+   *
+   * @param  {Event.<keyup>} event The keyup action from textarea
+   * @return {Undefined|String}    A return from the keypress methods
+   */
   handleKeyup(event) {
     if (event.code === 'Enter') { keypress.enter(); };
     if (event.code === 'Escape') { keypress.escape(); };
@@ -118,6 +187,12 @@ const actions = {
     return keypress.letter(event.key);
   },
 
+  /**
+   * Recieves the language button press event and toggles the lang.
+   *
+   * @param  {Event.<click>} event The click event from the language button
+   * @return {String}              The updated lang String via setProperty()
+   */
   changeLanguage(event) {
     const newLang = event.target.dataset['lang'];
 
@@ -125,22 +200,42 @@ const actions = {
     return setProperty('lang', newLang);
   },
 
+  /**
+   * Gets the textarea.value and sends it to speak().
+   *
+   * @return {Undefined}  The return from speak()
+   */
   speakText() {
     const currentText = state.textarea.value;
 
     return speak(currentText);
   },
 
+  /**
+   * Resets the textarea.value to ''.
+   *
+   * @return {String}   The updated value of textarea
+   */
   clearText() {
     return renderText('');
   },
 };
 
 const bind = {
+  /**
+   * Binds a handleKeyup methos to the textarea keyup event.
+   *
+   * @return {Undefined}  Return from addEventListener()
+   */
   textarea() {
     return state.textarea.addEventListener('keyup', actions.handleKeyup);
   },
 
+  /**
+   * Binds the changeLanguage method to the language button click events.
+   *
+   * @return {Array.<Undefined>}  An array of undefined responses from addEventListener()s
+   */
   languageButtons() {
     return state.languageButtons.map(function (language) {
       return language.addEventListener('click', actions.changeLanguage)
@@ -149,6 +244,11 @@ const bind = {
 };
 
 const app = {
+  /**
+   * Save the textarea HTMLElement to state.
+   *
+   * @return {Undefined}  Triggers the bind.textarea method textarea
+   */
   initTextArea() {
     const textarea = document.querySelector('[name="textarea"]');
 
@@ -156,12 +256,23 @@ const app = {
     return bind.textarea();
   },
 
+  /**
+   * initSynth - Creates an instance of speechSynthesis and saves it to the state.
+   *
+   * @return {SpeechSynthesis}  The instance of SpeechSynthesis
+   */
   initSynth() {
     const synth = window.speechSynthesis;
 
     return setProperty('synth', synth);
   },
 
+  /**
+   * initLanguages - Saves an Array of languageButtons to the state and triggers
+   * the bind.languageButtons()
+   *
+   * @return {Array.<Undefined>}  The response from the bind.languageButtons method
+   */
   initLanguages() {
     const nodeList = document.querySelectorAll('[name="change-language"]');
     const languageButtons = Array.from(nodeList);
@@ -170,6 +281,11 @@ const app = {
     return bind.languageButtons();
   },
 
+  /**
+   * init - Initialize the app by triggering all each init method.
+   *
+   * @return {Object}
+   */
   init() {
     this.initTextArea();
     this.initLanguages();
