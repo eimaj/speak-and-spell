@@ -47,7 +47,7 @@ const state = {
   // DOM elements:
   clear: null,
   submit: null,
-  languages: [],
+  languageButtons: [],
 
   // Config for speechSynthesis:
   lang: 'fr-CA',
@@ -84,9 +84,9 @@ const speak = function (text) {
 };
 
 const toggleLangButtons = function (newLang) {
-  const activeLang = state.languages.filter(language => language.dataset['lang'] === newLang);
+  const activeLang = state.languageButtons.filter(language => language.dataset['lang'] === newLang);
 
-  state.languages.map((lang) => lang.className = 'languages__toggle');
+  state.languageButtons.map((lang) => lang.className = 'languages__toggle');
   activeLang[0].className = 'languages__toggle languages__toggle--is-active';
 
   return activeLang[0];
@@ -137,7 +137,7 @@ const bind = {
   },
 
   languageButtons() {
-    return state.languages.map(function (language) {
+    return state.languageButtons.map(function (language) {
       return language.addEventListener('click', actions.changeLanguage)
     });
   },
@@ -161,7 +161,7 @@ const app = {
     const nodeList = document.querySelectorAll('[name="change-language"]');
     const languageButtons = Array.from(nodeList);
 
-    setProperty('languages', languageButtons);
+    setProperty('languageButtons', languageButtons);
     return bind.languageButtons();
   },
 
