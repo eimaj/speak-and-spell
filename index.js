@@ -137,6 +137,8 @@ const actions = {
 };
 
 const bind = {
+  textarea() {
+    return state.textarea.addEventListener('keyup', actions.handleKeyup);
   },
 
   languageButtons() {
