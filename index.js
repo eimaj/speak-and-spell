@@ -141,11 +141,6 @@ const bind = {
       return language.addEventListener('click', actions.changeLanguage)
     });
   },
-
-  submitButton() {
-    return state.submit.addEventListener('click', this.speakText);
-  },
-
   clearButton() {
     return state.clear.addEventListener('click', actions.clearText);
   },
@@ -153,12 +148,6 @@ const bind = {
 
 const app = {
   initTextArea() {
-  },
-
-  initSubmit() {
-    setProperty('submit', document.querySelector('[name="speak-input"]'));
-    return bind.submitButton();
-  },
     const textarea = document.querySelector('[name="textarea"]');
 
   initClear() {
