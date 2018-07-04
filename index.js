@@ -45,7 +45,6 @@ const letters = [
 
 const state = {
   // DOM elements:
-  input: null,
   output: null,
   clear: null,
   submit: null,
@@ -137,9 +136,6 @@ const actions = {
 };
 
 const bind = {
-  input() {
-    state.input.focus();
-    return state.input.addEventListener('keyup', actions.handleKeyup);
   },
 
   languageButtons() {
@@ -158,9 +154,6 @@ const bind = {
 };
 
 const app = {
-  initInput() {
-    setProperty('input', document.querySelector('body'));
-    return bind.input();
   },
 
   initOutput() {
