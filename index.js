@@ -45,7 +45,6 @@ const letters = [
 
 const state = {
   // DOM elements:
-  output: null,
   clear: null,
   submit: null,
   languages: [],
@@ -154,12 +153,6 @@ const bind = {
 };
 
 const app = {
-  },
-
-  initOutput() {
-    const output = document.querySelector('[name="textarea"]');
-
-    return setProperty('output', output);
   },
 
   initSubmit() {
