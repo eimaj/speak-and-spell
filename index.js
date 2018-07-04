@@ -45,6 +45,7 @@ const letters = [
 
 const state = {
   // DOM elements:
+  textarea: null,
   clear: null,
   submit: null,
   languageButtons: [],
