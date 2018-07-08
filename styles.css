@@ -1,0 +1,55 @@
+.speak-and-spell {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  font-family: monospace;
+}
+
+.text-output {
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  font-family: monospace;
+  font-size: 60px;
+  color: #90ee90;
+}
+
+.text-output:focus::placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+.languages {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
+
+.languages__toggle {
+  cursor: pointer;
+  color: grey;
+}
+
+.languages__toggle--is-active {
+  color: white;
+}
+
+.actions {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+  color: white;
+}
+
+.actions__action {
+  display: block;
+  color: white;
+}
