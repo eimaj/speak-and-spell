@@ -1,0 +1,8 @@
+{
+  "short_name": "Speak & Spell",
+  "name": "Speak & Spell",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#90ee90",
+  "background_color": "#000"
+}
