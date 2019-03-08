@@ -23,21 +23,35 @@
       </p>
     </header>
 
-    <textarea
-      class="text-output"
-      name="textarea"
-      placeholder="..."
-      autocomplete="off"
-      autocorrect="off"
-      autocapitalize="off"
-      autofocus="true"
-      spellcheck="false"
-      tabindex="1"
-    ></textarea>
+    <div class="text-output">
+      <textarea
+        class="text-output__textarea"
+        name="textarea"
+        placeholder="..."
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        autofocus="true"
+        spellcheck="false"
+        tabindex="1"
+      ></textarea>
+    </div>
 
     <div class="actions">
       <div class="actions--red">
         <div class="actions--blue">
+          <a class="actions__action" name="speak-input">
+            <span class="translate" name="speak">
+              Speak! (Enter)
+            </span>
+          </a>
+
+          <a class="actions__action" name="clear-input">
+            <span class="translate" name="clear">
+              Clear (Esc)
+            </span>
+          </a>
+
           <div class="actions__action languages">
             <span class="translate" name="language">
               Language:
@@ -56,18 +70,6 @@
               French
             </a>
           </div>
-
-          <a class="actions__action" name="speak-input">
-            <span class="translate" name="speak">
-              Speak! (Enter)
-            </span>
-          </a>
-
-          <a class="actions__action" name="clear-input">
-            <span class="translate" name="clear">
-              Clear (Esc)
-            </span>
-          </a>
         </div>
       </div>
     </div>
