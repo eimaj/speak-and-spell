@@ -5,13 +5,27 @@ html {
 .speak-and-spell {
   position: relative;
   margin: 0;
-  padding: 40px 0 0;
+  padding: 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   background-color: #8c211c;
   font-family: 'Press Start 2P', monospace;
   font-size: 14px;
+}
+
+.header {
+  padding: 20px 20px 30px;
+}
+
+.header__title {
+  margin: 0 0 10px;
+  color: #ffffff;
+}
+
+.header__warning {
+  margin: 0;
+  color: #ffffff;
 }
 
 .text-output {
@@ -54,6 +68,7 @@ html {
   margin: 20px auto;
   padding: 20px;
   max-width: 800px;
+  width: calc(100% - 40px);
   background-color: #d5ee90;
   box-sizing: border-box;
 }
@@ -78,6 +93,7 @@ html {
   margin: 0 auto 30px;
   padding: 0 20px;
   max-width: 800px;
+  width: calc(100% - 40px);
   box-sizing: border-box;
   text-align: right;
   color: #ffffff;
