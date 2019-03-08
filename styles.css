@@ -51,8 +51,9 @@ html {
 }
 
 .actions {
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
+  max-width: 800px;
   background-color: #d5ee90;
   box-sizing: border-box;
 }
@@ -74,7 +75,10 @@ html {
 }
 
 .source {
-  margin: 0 40px 30px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  max-width: 800px;
+  box-sizing: border-box;
   text-align: right;
   color: #ffffff;
 }
