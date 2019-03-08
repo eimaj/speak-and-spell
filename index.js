@@ -52,6 +52,8 @@ const letters = [
 
 const locale = {
   'en-US': {
+    title: 'Spell & Speak',
+    warning: 'Check your volume before you type!',
     language: 'Language:',
     english: 'English',
     french: 'French',
@@ -61,6 +63,8 @@ const locale = {
     source: 'Source on Github',
   },
   'fr-CA': {
+    title: 'Épeler et Parler',
+    warning: 'Vérifiez votre volume avant de taper!',
     language: 'Langue:',
     english: 'Anglais',
     french: 'Français',
