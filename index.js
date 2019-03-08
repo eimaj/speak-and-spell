@@ -240,8 +240,11 @@ const actions = {
   changeLanguage(event) {
     const newLang = event.target.dataset['lang'];
 
+    state.textarea.focus();
+
     setLanguageStrings(newLang);
     toggleLangButtons(newLang);
+
     return setProperty('lang', newLang);
   },
 
