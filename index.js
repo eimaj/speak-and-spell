@@ -6,50 +6,10 @@
 const languages = ['en-US', 'fr-CA'];
 
 /**
- * An Array of available key codes that can be rendered into the textarea.
+ * String translations
  *
- * @return {String[]}
+ * @return {Object}
  */
-const letters = [
-  'KeyA',
-  'KeyB',
-  'KeyC',
-  'KeyD',
-  'KeyE',
-  'KeyF',
-  'KeyG',
-  'KeyH',
-  'KeyI',
-  'KeyJ',
-  'KeyK',
-  'KeyL',
-  'KeyM',
-  'KeyN',
-  'KeyO',
-  'KeyP',
-  'KeyQ',
-  'KeyR',
-  'KeyS',
-  'KeyT',
-  'KeyU',
-  'KeyV',
-  'KeyW',
-  'KeyX',
-  'KeyY',
-  'KeyZ',
-  'Digit0',
-  'Digit1',
-  'Digit2',
-  'Digit3',
-  'Digit4',
-  'Digit5',
-  'Digit6',
-  'Digit7',
-  'Digit8',
-  'Digit9',
-  'Space',
-];
-
 const locale = {
   'en-US': {
     title: 'Spell & Speak',
@@ -219,13 +179,10 @@ const actions = {
    */
   handleKeyup(event) {
     if (event.code === 'Enter') {
-      keypress.enter();
+      return keypress.enter();
     }
     if (event.code === 'Escape') {
-      keypress.escape();
-    }
-    if (letters.indexOf(event.code) === -1) {
-      return false;
+      return keypress.escape();
     }
 
     return keypress.letter(event.key);
