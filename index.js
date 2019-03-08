@@ -63,7 +63,7 @@ const locale = {
     source: 'Source on Github',
   },
   'fr-CA': {
-    title: 'Épeler et Parler',
+    title: 'Épeler & Parler',
     warning: 'Vérifiez votre volume avant de taper!',
     language: 'Langue:',
     english: 'Anglais',
