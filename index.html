@@ -17,33 +17,47 @@
     <textarea
       class="text-output"
       name="textarea"
-      placeholder="Click here to type..."
+      placeholder="..."
       autocomplete="off"
       autocorrect="off"
       autocapitalize="off"
+      autofocus="true"
       spellcheck="false"
+      tabindex="1"
     ></textarea>
 
     <div class="actions">
       <div class="actions--red">
         <div class="actions--blue">
           <div class="actions__action languages">
-            Language:
-            <a class="languages__toggle" name="change-language" data-lang="en-US">
+            <span class="translate" name="language">
+              Language:
+            </span>
+
+            <a class="languages__toggle translate" name="english" ref="change-language" data-lang="en-US">
               English
             </a>
             /
-            <a class="languages__toggle languages__toggle--is-active" name="change-language" data-lang="fr-CA">
+            <a
+              class="languages__toggle languages__toggle--is-active translate"
+              name="french"
+              ref="change-language"
+              data-lang="fr-CA"
+            >
               French
             </a>
           </div>
 
           <a class="actions__action" name="speak-input">
-            Speak! (Enter)
+            <span class="translate" name="speak">
+              Speak! (Enter)
+            </span>
           </a>
 
           <a class="actions__action" name="clear-input">
-            Clear (Esc)
+            <span class="translate" name="clear">
+              Clear (Esc)
+            </span>
           </a>
         </div>
       </div>
@@ -51,11 +65,15 @@
 
     <div class="source">
       <a class="source--link" href="https://eimaj.dev">
-        Build by @eimaj
+        <span class="translate" name="built">
+          Built by @eimaj
+        </span>
       </a>
       /
       <a class="source--link" href="https://github.com/eimaj/alphabet">
-        Source on Github
+        <span class="translate" name="source">
+          Source on Github
+        </span>
       </a>
     </div>
 
