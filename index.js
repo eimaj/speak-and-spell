@@ -1,13 +1,9 @@
-
 /**
  * An Array of default languages based on the browser API
  *
  * @return {String[]}
  */
-const languages = [
-  'en-US',
-  'fr-CA',
-];
+const languages = ['en-US', 'fr-CA'];
 
 /**
  * An Array of available key codes that can be rendered into the textarea.
@@ -54,7 +50,6 @@ const letters = [
   'Space',
 ];
 
-
 /**
  * The initial state Object for this application.
  *
@@ -82,7 +77,7 @@ const state = {
  * @param  {Boolean|String|Array|Object}   value The value to set at key
  * @return {Boolean|String|Array|Object}
  */
-const setProperty = function (key, value) {
+const setProperty = function(key, value) {
   state[key] = value;
   return state[key];
 };
@@ -93,7 +88,7 @@ const setProperty = function (key, value) {
  * @param  {String} text The text to set as the textarea value
  * @return {String}      The updated value of textarea
  */
-const renderText = function (text) {
+const renderText = function(text) {
   state.textarea.value = text;
 
   return state.textarea.value;
@@ -105,7 +100,7 @@ const renderText = function (text) {
  * @param  {String} text  The text to speak
  * @return {Undefined}
  */
-const speak = function (text) {
+const speak = function(text) {
   const utterance = new SpeechSynthesisUtterance('');
 
   // Config:
@@ -126,10 +121,10 @@ const speak = function (text) {
  * @param  {String} newLang   The lang that will be set
  * @return {HTMLElement}      The active button
  */
-const toggleLangButtons = function (newLang) {
+const toggleLangButtons = function(newLang) {
   const activeLang = state.languageButtons.filter(language => language.dataset['lang'] === newLang);
 
-  state.languageButtons.map((lang) => lang.className = 'languages__toggle');
+  state.languageButtons.map(lang => (lang.className = 'languages__toggle'));
   activeLang[0].className = 'languages__toggle languages__toggle--is-active';
 
   return activeLang[0];
@@ -180,9 +175,15 @@ const actions = {
    * @return {Undefined|String}    A return from the keypress methods
    */
   handleKeyup(event) {
-    if (event.code === 'Enter') { keypress.enter(); };
-    if (event.code === 'Escape') { keypress.escape(); };
-    if (letters.indexOf(event.code) === -1) { return false; };
+    if (event.code === 'Enter') {
+      keypress.enter();
+    }
+    if (event.code === 'Escape') {
+      keypress.escape();
+    }
+    if (letters.indexOf(event.code) === -1) {
+      return false;
+    }
 
     return keypress.letter(event.key);
   },
@@ -237,8 +238,8 @@ const bind = {
    * @return {Array.<Undefined>}  An array of undefined responses from addEventListener()s
    */
   languageButtons() {
-    return state.languageButtons.map(function (language) {
-      return language.addEventListener('click', actions.changeLanguage)
+    return state.languageButtons.map(function(language) {
+      return language.addEventListener('click', actions.changeLanguage);
     });
   },
 };
