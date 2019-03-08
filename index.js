@@ -50,6 +50,27 @@ const letters = [
   'Space',
 ];
 
+const locale = {
+  'en-US': {
+    language: 'Language:',
+    english: 'English',
+    french: 'French',
+    speak: 'Speak! (Enter)',
+    clear: 'Clear (Esc)',
+    built: 'Built by @eimaj',
+    source: 'Source on Github',
+  },
+  'fr-CA': {
+    language: 'Langue:',
+    english: 'Anglais',
+    french: 'Français',
+    speak: 'Parler! (Entre)',
+    clear: 'Recommencer (Esc)',
+    built: 'Construit par @eimaj',
+    source: 'Source sur Github',
+  },
+};
+
 /**
  * The initial state Object for this application.
  *
@@ -113,6 +134,24 @@ const speak = function(text) {
 
   // Speak:
   return state.synth.speak(utterance);
+};
+
+/**
+ * Updates the UI strings based on the language selected.
+ *
+ * @param  {String} text  The locale [en-US, fr-CA]
+ * @return {Array}        An array of translated UI keys/values
+ */
+const setLanguageStrings = function(newLang) {
+  const localeStrings = locale[newLang];
+  const translateNodes = document.querySelectorAll('.translate');
+
+  return [...translateNodes].map(node => {
+    const attr = node.attributes.getNamedItem('name').nodeValue;
+
+    node.innerText = localeStrings[attr] || 'Missing translation';
+    return { [attr]: localeStrings[attr] };
+  });
 };
 
 /**
@@ -197,6 +236,7 @@ const actions = {
   changeLanguage(event) {
     const newLang = event.target.dataset['lang'];
 
+    setLanguageStrings(newLang);
     toggleLangButtons(newLang);
     return setProperty('lang', newLang);
   },
@@ -275,9 +315,10 @@ const app = {
    * @return {Array.<Undefined>}  The response from the bind.languageButtons method
    */
   initLanguages() {
-    const nodeList = document.querySelectorAll('[name="change-language"]');
+    const nodeList = document.querySelectorAll('[ref="change-language"]');
     const languageButtons = Array.from(nodeList);
 
+    setLanguageStrings(state.lang);
     setProperty('languageButtons', languageButtons);
     return bind.languageButtons();
   },
