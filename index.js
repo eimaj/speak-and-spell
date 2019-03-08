@@ -127,8 +127,8 @@ const setLanguageStrings = function(newLang) {
 const toggleLangButtons = function(newLang) {
   const activeLang = state.languageButtons.filter(language => language.dataset['lang'] === newLang);
 
-  state.languageButtons.map(lang => (lang.className = 'languages__toggle'));
-  activeLang[0].className = 'languages__toggle languages__toggle--is-active';
+  state.languageButtons.map(lang => (lang.className = 'translate languages__toggle'));
+  activeLang[0].className = 'translate languages__toggle languages__toggle--is-active';
 
   return activeLang[0];
 };
