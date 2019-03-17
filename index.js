@@ -177,7 +177,9 @@ const actions = {
    * @param  {Event.<keyup>} event The keyup action from textarea
    * @return {Undefined|String}    A return from the keypress methods
    */
-  handleKeyup(event) {
+  handleOnKeyup(event) {
+    console.log(event);
+
     if (event.code === 'Enter') {
       return keypress.enter();
     }
@@ -228,12 +230,12 @@ const actions = {
 
 const bind = {
   /**
-   * Binds a handleKeyup methos to the textarea keyup event.
+   * Binds a handleOnKeyup methos to the textarea keyup event.
    *
    * @return {Undefined}  Return from addEventListener()
    */
   textarea() {
-    return state.textarea.addEventListener('keyup', actions.handleKeyup);
+    return state.textarea.addEventListener('keyup', actions.handleOnKeyup);
   },
 
   /**
