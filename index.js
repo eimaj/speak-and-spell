@@ -86,6 +86,11 @@ const renderText = function(text) {
  * @return {Undefined}
  */
 const speak = function(text) {
+  // If text is undefined, say nothing.
+  if (text === undefined) {
+    return;
+  }
+
   const utterance = new SpeechSynthesisUtterance('');
 
   // Config:
@@ -183,6 +188,7 @@ const actions = {
     if (event.code === 'Enter') {
       return keypress.enter();
     }
+
     if (event.code === 'Escape') {
       return keypress.escape();
     }
